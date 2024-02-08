@@ -8,7 +8,7 @@ function Games() {
   useEffect(
     () => {
       // call to bkend to get additional info
-      axios.get('http://localhost:8000/games')
+      axios.get('http://localhost:8000/users')
         .then((response) => {
           const gamesObject = response.data.Data;
           const keys = Object.keys(gamesObject);
@@ -34,8 +34,7 @@ function Games() {
     )}
     {games.map((game) => (
       <div className="game-container">
-        <h2>{game.name}</h2>
-        <p>Players: {game.numPlayers}</p>
+        <h2>{game.user_name}</h2>
       </div>
     ))}
   </div>

@@ -14,7 +14,7 @@ import './App.css';
 //   );
 // }
 
-import Navbar from './Components/Navbar/Navbar';
+import Navbar from './Components/Navbar';
 import Games from './Components/Games';
 
 function App() {
