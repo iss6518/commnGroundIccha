@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+Start by cloaning this repository using the script: 
+
+### `git clone https://github.com/iss6518/commnGroundIccha.git`
+
+Under the project repository run the following script to install all necessary node modules
+
+### `npm install`
+
 In the project directory, you can run:
 
 ### `npm start`
@@ -13,6 +21,16 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+To run the back-end in the background:
+
+open a new terminal and cd into your team-slick directory
+
+once there run all necessary set up commands and use the following script to get swagger running on http://127.0.0.1:8000/
+
+### `.\local.sh`
+
+Additional scripts:
 
 ### `npm test`
 
