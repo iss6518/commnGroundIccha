@@ -21,6 +21,7 @@ function AddGameForm({ setError, fetchGames, cancel, visible }) {
     });
   };
   
+  //test
   // if (!visible) return null;
   return(
     <form>
