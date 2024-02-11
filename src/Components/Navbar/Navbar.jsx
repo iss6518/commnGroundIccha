@@ -5,6 +5,9 @@ const PAGES = [
     { label: 'Home', destination: '/' },
     { label: 'Games', destination: '/games' },
     { label: 'Users', destination: '/users' },
+    { label: 'Friend Requests', destination: '/friendRequests'},
+    {label: 'My Friends', destination: '/friends'},
+    {label: 'Profile', destination: '/profile'}
 ];
 
 function Navbar() {
