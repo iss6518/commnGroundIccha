@@ -22,15 +22,31 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-To run the back-end in the background:
+## Running the back-end:
 
-open a new terminal and cd into your team-slick directory
+To see data from BE, you need the back-end running in the background.
 
-once there run all necessary set up commands and use the following script to get swagger running on http://127.0.0.1:8000/
+If you haven't done so, open a new terminal window and clone the team-slick BE repo using the script:
 
-### `.\local.sh`
+### `git clone https://github.com/iss6518/team-slick.git`
 
-Additional scripts:
+cd into your team-slick directory and run all necessary set up commands:
+
+1) to set your python environment variable
+### export PYTHONPATH=$PYTHONPATH:$(pwd)
+2) to pip install necessary dependancies for project
+### make dev_env
+3) to start a mongo service on your device
+### sudo service mongod start
+4) to signin to our cloud mongoDB 
+### export MONGODB_PASSWORD=<INSERT OUR MONGODB PW HERE>
+5) set to 1 in order to run against our cloud mongoDB
+### export CLOUD_MONGO=1
+6) to run the swagger endpoint on http://127.0.0.1:8000/
+### ./local.sh
+
+
+## Additional scripts:
 
 ### `npm test`
 
