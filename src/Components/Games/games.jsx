@@ -48,7 +48,7 @@ AddGameForm.propTypes = {
   setError: propTypes.func.isRequired,
 };
 
-function Games() {
+function Games() { //fetching from backend
   const [error, setError] = useState('');
   const [games, setGames] = useState([]);
   // const [addingGame, setAddingGame] = useState(true);
