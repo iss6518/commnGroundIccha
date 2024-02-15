@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import { BACKEND_URL } from '../../constants';
+
+const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
 function AddGameForm({ setError, fetchGames, cancel, visible }) {
   const [name, setName] = useState('');
@@ -11,7 +14,7 @@ function AddGameForm({ setError, fetchGames, cancel, visible }) {
 
   const addGame = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8000/users', { name: name, numPlayers: number }) // sends a post request
+    axios.post(USERS_ENDPOINT, { name: name, numPlayers: number }) // sends a post request
     .then(() => {
       setError('');
       fetchGames();
@@ -54,7 +57,7 @@ function Games() { //fetching from backend
   // const [addingGame, setAddingGame] = useState(true);
 
   const fetchGames = () => {
-    axios.get('http://localhost:8000/users')
+    axios.get(USERS_ENDPOINT)
     .then((response) => {
       const gamesObject = response.data.Data;
       const keys = Object.keys(gamesObject);
