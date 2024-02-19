@@ -5,7 +5,7 @@ import { BACKEND_URL } from '../../constants';
 
 const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
-function AddGameForm({ setError, fetchGames, cancel, visible }) {
+function FriendReqs({ setError, get, cancel, visible }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState(0);
 
@@ -17,7 +17,7 @@ function AddGameForm({ setError, fetchGames, cancel, visible }) {
     axios.post(USERS_ENDPOINT, { name: name, numPlayers: number }) // sends a post request
     .then(() => {
       setError('');
-      fetchGames();
+      get();
     })
     .catch((error) => {
       setError(error.response.data.message);
@@ -44,25 +44,25 @@ function AddGameForm({ setError, fetchGames, cancel, visible }) {
 
 // for adding cancel/visible
 // **** TODO need to figure this out
-AddGameForm.propTypes = {
+FriendReqs.propTypes = {
   visible: propTypes.bool.isRequired,
   cancel: propTypes.func.isRequired,
-  fetchGames: propTypes.func.isRequired,
+  get: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
 };
 
-function Games() { //fetching from backend
+function Matches() { //fetching from backend
   const [error, setError] = useState('');
-  const [games, setGames] = useState([]);
+  const [matches, setMatches] = useState([]);
   // const [addingGame, setAddingGame] = useState(true);
 
-  const fetchGames = () => {
+  const get = () => {
     axios.get(USERS_ENDPOINT)
     .then((response) => {
-      const gamesObject = response.data.Data;
-      const keys = Object.keys(gamesObject);
-      const gamesArray = keys.map((key) => gamesObject[key]);
-      setGames(gamesArray);
+      const matchesObject = response.data.Data;
+      const keys = Object.keys(matchesObject);
+      const MatchesArray = keys.map((key) => matchesObject[key]);
+      setMatches(gamesArray);
       console.log(response);
     }) // something good
     .catch(() => { setError('Something went wrong'); }); //something bad
@@ -72,7 +72,7 @@ function Games() { //fetching from backend
   // const hideAddGameForm = () => { setAddingGame(false); };
 
   useEffect(
-    fetchGames,
+    get,
     [],
     // if THIS isempty meaning it'll only
     // be called on initial render of app
@@ -88,13 +88,13 @@ function Games() { //fetching from backend
       {error}
       </div>
     )}
-    <AddGameForm 
+    <FriendReqs 
     setError={setError}
-    fetchGames={fetchGames}
-    // cancel={hideAddGameForm}
+    get={get}
+    // cancel={hideFriendReqs}
     />
-    {games.map((game) => (
-      <div className="game-container">
+    {matches.map((game) => (
+      <div className="friend-requests">
         <h2>{game.user_name}</h2>
       </div>
     ))}
