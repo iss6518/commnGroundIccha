@@ -1,1 +1,3 @@
-import axios from 'axios';
+import FriendReqs from './friendRequest';
+
+export default FriendReqs;
