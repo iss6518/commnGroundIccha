@@ -18,6 +18,7 @@ import Navbar from './Components/Navbar';
 import Games from './Components/Games';
 import Profile from './Components/Profile';
 import Users from './Components/Users';
+import Login from './Components/LogIn';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
     <Routes>
       <Route path ="" element={<h1>Home</h1>} />
       <Route path="games" element={<Games />} />
+      <Route path="login" element={<Login/>} />
 
       <Route path ="friendRequests" element={<h1>Friends Requests</h1>} />
       <Route path ="friends" element={<h1>My Friends</h1>} />
