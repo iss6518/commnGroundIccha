@@ -3,7 +3,9 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
 
-const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+// const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+
+const USERS_ENDPOINT = "http://127.0.0.1:8000/users"
 
 function AddGameForm({ setError, fetchGames, cancel, visible }) {
   const [name, setName] = useState('');
