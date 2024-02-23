@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import { BACKEND_URL } from '../../constants';
+// import { BACKEND_URL } from '../../constants';
 
-<<<<<<< HEAD
-// const USERS_ENDPOINT = `${BACKEND_URL}/users`;
-
-const USERS_ENDPOINT = "http://127.0.0.1:8000/users"
-=======
 const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
 // const USERS_ENDPOINT = `${BACKEND_URL}/users`;
->>>>>>> 7b7445bb844badb2ee2a96c5e75f58c66729703e
 
-function AddGameForm({ setError, fetchGames, cancel, visible }) {
+function LogInForm({ setError, fetchUser, cancel, visible }) {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState(0);
+  const [password, setPassword] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
-  const changeNumber = (event) => { setNumber(event.target.value); };
+  const changePassword = (event) => { setPassword(event.target.value); };
 
-  const addGame = (event) => {
+  const logIn = (event) => {
     event.preventDefault();
-    axios.post(USERS_ENDPOINT, { name: name, numPlayers: number }) // sends a post request
+    axios.post(USERS_ENDPOINT, { name: name, password: password })
     .then(() => {
       setError('');
-      fetchGames();
+      fetchUser();
     })
     .catch((error) => {
       setError(error.response.data.message);
@@ -40,10 +34,10 @@ function AddGameForm({ setError, fetchGames, cancel, visible }) {
         </label>
         <input type="text" id="name" value={name} onChange={changeName}/>
         <label htmlFor="name"> 
-          Number
+          Password
         </label>
-        <input type="number" id="number" value={number} onChange={changeNumber}/>
-        <button type="submit" onClick={addGame}>Submit</button>
+        <input type="text" id="name" value={password} onChange={changePassword}/>
+        <button type="submit" onClick={logIn}>LogIn</button>
         <button type="button" onClick={cancel}>Cancel</button>
     </form>
   );
@@ -51,19 +45,19 @@ function AddGameForm({ setError, fetchGames, cancel, visible }) {
 
 // for adding cancel/visible
 // **** TODO need to figure this out
-AddGameForm.propTypes = {
+LogInForm.propTypes = {
   visible: propTypes.bool.isRequired,
   cancel: propTypes.func.isRequired,
-  fetchGames: propTypes.func.isRequired,
+  fetchUser: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
 };
 
-function Games() { //fetching from backend
+function Login() { //fetching from backend
   const [error, setError] = useState('');
   const [games, setGames] = useState([]);
   // const [addingGame, setAddingGame] = useState(true);
 
-  const fetchGames = () => {
+  const fetchUser = () => {
     axios.get(USERS_ENDPOINT)
     .then((response) => {
       const gamesObject = response.data.Data;
@@ -79,7 +73,7 @@ function Games() { //fetching from backend
   // const hideAddGameForm = () => { setAddingGame(false); };
 
   useEffect(
-    fetchGames,
+    fetchUser,
     [],
     // if THIS isempty meaning it'll only
     // be called on initial render of app
@@ -88,16 +82,16 @@ function Games() { //fetching from backend
   return (
   <div className="wrapper">
     <h1>
-      Games - but new
+      Log In
     </h1>
     {error && (
       <div className="error-message">
       {error}
       </div>
     )}
-    <AddGameForm 
+    <LogInForm 
     setError={setError}
-    fetchGames={fetchGames}
+    fetchUser={fetchUser}
     // cancel={hideAddGameForm}
     />
     {games.map((game) => (
@@ -109,4 +103,4 @@ function Games() { //fetching from backend
   );
 }
 
-export default Games;
+export default Login;
