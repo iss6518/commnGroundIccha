@@ -17,6 +17,8 @@ import './App.css';
 import Navbar from './Components/Navbar';
 import Games from './Components/Games';
 import Profile from './Components/Profile';
+import Friends from './Components/Friends';
+// import FriendReqs from './Components/FriendReqs';
 import Users from './Components/Users';
 
 function App() {
@@ -28,7 +30,7 @@ function App() {
       <Route path="games" element={<Games />} />
 
       <Route path ="friendRequests" element={<h1>Friends Requests</h1>} />
-      <Route path ="friends" element={<h1>My Friends</h1>} />
+      <Route path ="friends" element={<Friends/>} />
       <Route path ="profile" element={<Profile/>} />
       <Route path ="users"  element = {<h1>List of users...</h1>} />
     </Routes>
