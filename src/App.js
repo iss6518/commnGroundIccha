@@ -29,12 +29,12 @@ function App() {
     <Routes>
       <Route path ="" element={<h1>Home</h1>} />
       <Route path="games" element={<Games />} />
-      <Route path="login" element={<Login/>} />
+      <Route path="login" element={<Login />} />
 
       <Route path ="friendRequests" element={<h1>Friends Requests</h1>} />
       <Route path ="friends" element={<Friends/>} />
       <Route path ="profile" element={<Profile/>} />
-      <Route path ="users"  element = {<h1>List of users...</h1>} />
+      <Route path ="users"  element = {<Users />} />
     </Routes>
     </BrowserRouter>
   );
