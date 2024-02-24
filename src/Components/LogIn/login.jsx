@@ -70,6 +70,7 @@ function Login() { //fetching from backend
         if (response.data.accessToken) {
             localStorage.setItem("user", JSON.stringify(response.data));
           }
+          console.log('This is response data')
           console.log(response.data);
           // return response.data;
     }) // something good
