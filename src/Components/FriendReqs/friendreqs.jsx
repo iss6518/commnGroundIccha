@@ -10,7 +10,7 @@ function FriendRequest({ request }) {
   const { user_name, interests } = request;
   return (
     <div className="friend-request-container">
-      <Link to={`/users/${user_name}`}>
+      <Link to={user_name}>
         <h2>{user_name}</h2>
       </Link>
       <p>Interest: {interests}</p>
@@ -26,73 +26,27 @@ FriendReqs.propTypes = {
   }).isRequired,
 };
 
-function FriendReqs({ setError, get, cancel, visible }) {
+// Function to convert object of requests to an array
+function requestsObjectToArray({ Data }) {
+  const keys = Object.keys(Data)
+  const users = keys.map((key)=>Data[key])
+  return users
+}
+
+// Main component to display all friend requests
+function FriendReqs() {
   const [requests, setRequests] = useState([]);
   const [error, setError] = useState('');
 
-  const changeName = (event) => { setName(event.target.value); };
-  const changeNumber = (event) => { setNumber(event.target.value); };
-
-  const addGame = (event) => {
-    event.preventDefault();
-    axios.post(USERS_ENDPOINT, { name: name, numPlayers: number }) // sends a post request
-    .then(() => {
-      setError('');
-      get();
-    })
-    .catch((error) => {
-      setError(error.response.data.message);
-    });
-  };
-  
-  //test
-  // if (!visible) return null;
-  return(
-    <form>
-        <label htmlFor="name"> 
-          Name
-        </label>
-        <input type="text" id="name" value={name} onChange={changeName}/>
-        <label htmlFor="name"> 
-          Number
-        </label>
-        <input type="number" id="number" value={number} onChange={changeNumber}/>
-        <button type="submit" onClick={addGame}>Submit</button>
-        <button type="button" onClick={cancel}>Cancel</button>
-    </form>
-  );
-}
-
-// for adding cancel/visible
-// **** TODO need to figure this out
-
-
-function Matches() { //fetching from backend
-  const [error, setError] = useState('');
-  const [matches, setMatches] = useState([]);
-  // const [addingGame, setAddingGame] = useState(true);
-
-  const get = () => {
-    axios.get(USERS_ENDPOINT)
-    .then((response) => {
-      const matchesObject = response.data.Data;
-      const keys = Object.keys(matchesObject);
-      const MatchesArray = keys.map((key) => matchesObject[key]);
-      setMatches(gamesArray);
-      console.log(response);
-    }) // something good
-    .catch(() => { setError('Something went wrong'); }); //something bad
+  const fetchFriendRequests = () => {
+    axios.get(FRIEND_REQUESTS_ENDPOINT)
+      .then(({ data }) => setRequests(requestsObjectToArray(data)))
+      .catch(() => setError('Something went wrong fetching friend requests.'));
   };
 
-  // const showAddGameForm = () => { setAddingGame(true); };
-  // const hideAddGameForm = () => { setAddingGame(false); };
-
-  useEffect(
-    get,
-    [],
-    // if THIS isempty meaning it'll only
-    // be called on initial render of app
-  );
+  useEffect(() => {
+    fetchFriendRequests();
+  }, []);
 
   return (
     <div className="wrapper">
