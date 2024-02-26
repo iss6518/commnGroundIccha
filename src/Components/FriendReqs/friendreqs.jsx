@@ -1,13 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import { BACKEND_URL } from '../../constants';
 
-const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+
+const USERS_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
+
+// Component to display a single friend request
+function FriendRequest({ request }) {
+  const { user_name, interests } = request;
+  return (
+    <div className="friend-request-container">
+      <Link to={`/users/${user_name}`}>
+        <h2>{user_name}</h2>
+      </Link>
+      <p>Interest: {interests}</p>
+    </div>
+  );
+}
+
+//propTypes for friend request component
+FriendReqs.propTypes = {
+  request: propTypes.shape({
+    user_name: propTypes.string.isRequired,
+    interests: propTypes.string,
+  }).isRequired,
+};
 
 function FriendReqs({ setError, get, cancel, visible }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState(0);
+  const [requests, setRequests] = useState([]);
+  const [error, setError] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
   const changeNumber = (event) => { setNumber(event.target.value); };
@@ -44,12 +65,7 @@ function FriendReqs({ setError, get, cancel, visible }) {
 
 // for adding cancel/visible
 // **** TODO need to figure this out
-FriendReqs.propTypes = {
-  visible: propTypes.bool.isRequired,
-  cancel: propTypes.func.isRequired,
-  get: propTypes.func.isRequired,
-  setError: propTypes.func.isRequired,
-};
+
 
 function Matches() { //fetching from backend
   const [error, setError] = useState('');
@@ -79,27 +95,14 @@ function Matches() { //fetching from backend
   );
 
   return (
-  <div className="wrapper">
-    <h1>
-      Games - but new
-    </h1>
-    {error && (
-      <div className="error-message">
-      {error}
+    <div className="wrapper">
+      <h1>Friend Requests</h1>
+      {error && <div className="error-message">{error}</div>}
+      <div className="request-list">
+        {requests.map((request) => <FriendRequest key={request.user_name} request={request} />)}
       </div>
-    )}
-    <FriendReqs 
-    setError={setError}
-    get={get}
-    // cancel={hideFriendReqs}
-    />
-    {matches.map((game) => (
-      <div className="friend-requests">
-        <h2>{game.user_name}</h2>
-      </div>
-    ))}
-  </div>
+    </div>
   );
 }
 
-export default Games;
+export default FriendReqs;
