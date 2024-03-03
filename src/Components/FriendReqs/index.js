@@ -1,3 +1,3 @@
-import FriendReqs from './friendRequest';
+import FriendReqs from './friendreqs';
 
 export default FriendReqs;

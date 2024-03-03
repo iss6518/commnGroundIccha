@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
-const USERS_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
+const FRIEND_REQUESTS_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
 
 // Component to display a single friend request
 function FriendRequest({ request }) {
