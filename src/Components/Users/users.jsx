@@ -49,7 +49,7 @@ UserSearchForm.propTypes = {
 function User({user}) {
   const {user_name, interests} = user; 
   return (
-    <div className="game-container">
+    <div className="user-container">
       <Link to={user_name}>
           <h2>{user_name}</h2>
       </Link>
@@ -95,8 +95,8 @@ function Users() {
   };
 
   // if user clicks on Add Game button toggle on and off visibility of add form
-  const showAddGameForm = () => { setfindingUser(true); };
-  const hideAddGameForm = () => { setfindingUser(false); };
+  const showAddUserForm = () => { setfindingUser(true); };
+  const hideAddUserForm = () => { setfindingUser(false); };
 
   useEffect(() => {
     fetchUsers();
@@ -106,14 +106,14 @@ function Users() {
     <div className="wrapper">
       <header>
         <h1>All users</h1>
-        <button type="button" onClick={showAddGameForm}>
+        <button type="button" onClick={showAddUserForm}>
           Search!
         </button>
       </header>
 
       <UserSearchForm
         visible={findingUser}
-        cancel={hideAddGameForm}
+        cancel={hideAddUserForm}
         fetchUsers={fetchUsers}
         setError={setError}
       />
