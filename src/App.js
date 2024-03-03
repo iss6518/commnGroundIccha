@@ -15,7 +15,6 @@ import './App.css';
 // }
 
 import Navbar from './Components/Navbar';
-import Games from './Components/Games';
 import Profile from './Components/Profile';
 import Friends from './Components/Friends';
 // import FriendReqs from './Components/FriendReqs';
@@ -28,9 +27,7 @@ function App() {
     <Navbar />
     <Routes>
       <Route path ="" element={<h1>Home</h1>} />
-      <Route path="games" element={<Games />} />
       <Route path="login" element={<Login />} />
-
       <Route path ="friendRequests" element={<h1>Friends Requests</h1>} />
       <Route path ="friends" element={<Friends/>} />
       <Route path ="profile" element={<Profile/>} />
