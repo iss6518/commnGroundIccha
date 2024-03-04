@@ -22,7 +22,7 @@ function FriendRequest({ request }) {
 //propTypes for friend request component
 FriendReqs.propTypes = {
   request: propTypes.shape({
-    user_name: propTypes.string.isRequired,
+    user_name: propTypes.string,
     interests: propTypes.string,
   }).isRequired,
 };
@@ -45,10 +45,12 @@ function FriendReqs() {
       .catch(() => setError('Something went wrong fetching friend requests.'));
   };
 
-  useEffect(() => {
-    fetchFriendRequests();
-  }, []);
-
+  useEffect(
+    fetchFriendRequests,
+    [],
+    // if THIS isempty meaning it'll only
+    // be called on initial render of app
+  );
   return (
     <div className="wrapper">
       <h1>Friend Requests</h1>
