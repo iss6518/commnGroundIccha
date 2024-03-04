@@ -15,6 +15,7 @@ html {
   --background-color: var(--off-white);
   --accent-color: var(--cambridge-blue);
   background-color: var(--background-color);
+  text-shadow: 1px 1pc 2pk var(--bistre);
 }
 
 .wrapper {
