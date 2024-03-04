@@ -37,10 +37,10 @@ function Navbar() {
 
     return (
         <nav>
-            <ul>
-                {PAGES.map(mapper)}
-            </ul>
-        </nav>
+      <ul className="wrapper">
+        {PAGES.map((page) => <NavLink key={page.destination} page={page} />)}
+      </ul>
+    </nav>
     );
 }
 
