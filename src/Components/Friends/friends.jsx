@@ -41,8 +41,9 @@ function Friends() { //fetching from backend
     )}
    
     {friends.map((friend) => (
-      <div className="friend-container">
+      <div className="user-container">
         <h2>{friend.user_name}</h2>
+        <button className="removeFriendBtn"> Remove Friend </button>
       </div>
     ))}
   </div>
