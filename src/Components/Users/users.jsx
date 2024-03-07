@@ -7,7 +7,13 @@ import {Link} from 'react-router-dom';
 const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
 const FRIENDS_ENDPOINT = `http://127.0.0.1:8000/matches`; // would be friends pg
 
+// NOTES:
+// GET fetchUsers does work
+// POST findUsers (in UserSearchForm) does not work yet * (but wouldn't this be PUT???)
+// POST? addFriend is what i'm curr working on (IS 03/07/24) **
+// ------
 
+// This doesn't work yet, attempt here (DA)
 function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
   const [name, setName] = useState('')
 
@@ -38,6 +44,7 @@ function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
     </form>
   );
 }
+
 UserSearchForm.propTypes = {
   visible: propTypes.bool.isRequired,
   cancel: propTypes.func.isRequired,
@@ -45,7 +52,7 @@ UserSearchForm.propTypes = {
   setError: propTypes.func.isRequired,
 };
 
-
+// Lines 55-83 work!
 function User({user, addFriend}) {
   const {user_name, interests} = user;
   return (
@@ -75,10 +82,14 @@ function usersObjectToArray({Data}) {
   return users
 }
 
+// ** Should I have addUsers in this func? Or which one? **
+// don't want/need to make a separate component like UserAddForm
 function Users() {
   const [users, setUsers] = useState([]);
+  const [friend, addAFriend] = useState([]);
   const [error, setError] = useState('');
   const [findingUser, setfindingUser] = useState(false);
+  const [friendToAdd, setfriendToAdd] = useState(false);
 
   // Iccha Adding 03/07/24 ***
   // NEW FUNC: add a friend (match)
@@ -88,7 +99,14 @@ function Users() {
   const addFriend = () => {
     axios.get(FRIENDS_ENDPOINT)
     .then(({data})=> {
-      // addAFriend(usersObjectToArray(data))
+      if(friendToAdd) { // TODO: friendToAdd has to be one clicked (how to capture that value ***)
+        const filteredByName = users.filter(user => {
+          return user.user_name.toLowerCase().includes(friendToAdd.toLowerCase());
+        })
+        addAFriend(usersObjectToArray(filteredByName)) 
+        // TODO: would have to be filteredByName (other) and current logged in user 
+        // (add mock for now, Dareck add?)
+      }
     })
     // keep the error here
     .catch(() => { setError('Something went wrong'); }); //something bad
@@ -114,7 +132,7 @@ function Users() {
 
   useEffect(() => {
     fetchUsers();
-  }, []); 
+  }, []);
 
   return (
     <div className="wrapper">
