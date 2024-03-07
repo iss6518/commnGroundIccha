@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 
 
 const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
+const FRIENDS_ENDPOINT = `http://127.0.0.1:8000/matches`; // would be friends pg
 
 
 function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
@@ -45,19 +46,19 @@ UserSearchForm.propTypes = {
 };
 
 
-
-function User({user}) {
-  const {user_name, interests} = user; 
+function User({user, addFriend}) {
+  const {user_name, interests} = user;
   return (
     <div className="user-container">
       <Link to={user_name}>
           <h2>{user_name}</h2>
       </Link>
+      <button type="submit" onClick={addFriend} className="addFriendBtn"> Add Friend </button>
       <p>
-        Skill: ...
+        Skill: ...          
+        <br></br>
         Interest: {interests}
       </p>
-      <button className="addFriendBtn"> Add Friend </button>
     </div>
   );
 }
@@ -68,18 +69,30 @@ User.propTypes = {
   }).isRequired,
 };
 
-
 function usersObjectToArray({Data}) {
   const keys = Object.keys(Data)
   const users = keys.map((key)=>Data[key])
   return users
 }
 
-
 function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
   const [findingUser, setfindingUser] = useState(false);
+
+  // Iccha Adding 03/07/24 ***
+  // NEW FUNC: add a friend (match)
+  // need current user (^ user_name)
+  // need user clicked (o/ user_name)
+  // then use add user endpoint
+  const addFriend = () => {
+    axios.get(FRIENDS_ENDPOINT)
+    .then(({data})=> {
+      // addAFriend(usersObjectToArray(data))
+    })
+    // keep the error here
+    .catch(() => { setError('Something went wrong'); }); //something bad
+  };
 
   const fetchUsers = () => {
     axios.get(USERS_ENDPOINT)
