@@ -57,6 +57,7 @@ function User({user}) {
         Skill: ...
         Interest: {interests}
       </p>
+      <button className="addFriendBtn"> Add Friend </button>
     </div>
   );
 }

@@ -167,3 +167,21 @@ nav a:focus {
   margin: 0;
   font-size: 1.5rem;
 }
+
+.addFriendBtn {
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  border-radius: 5px;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background: var(--background-color);
+  width: 100px;
+}
+
+.addFriendBtn:focus,
+.addFriendBtn:hover {
+  background: var(--accent-color);
+  color: var(--background-color);
+}
