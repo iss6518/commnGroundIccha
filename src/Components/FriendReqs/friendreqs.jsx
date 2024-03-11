@@ -34,7 +34,7 @@ function FriendRequest({ request, onDelete }) {
         <h2>{user_name}</h2>
       </Link>
       <p>Interest: {interests}</p>
-      <button onClick = {handleDelete} disabled={isDeleting}> 
+      <button className='delete-button' onClick = {handleDelete} disabled={isDeleting}> 
         {isDeleting ? 'Deleting now...' : 'Delete Request'}
       </button>
     </div>
