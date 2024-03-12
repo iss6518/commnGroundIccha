@@ -7,14 +7,36 @@ import {Link} from 'react-router-dom';
 const FRIEND_REQUESTS_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
 
 // Component to display a single friend request
-function FriendRequest({ request }) {
+//We also add ability to delete a friend request
+function FriendRequest({ request, onDelete }) {
   const { user_name, interests } = request;
+  const [isDeleting, setDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      setDeleting(true);
+
+      // calling endpoint to delete the friend request
+      await axios.delete(FRIEND_REQUESTS_ENDPOINT + '/' + user_name);
+      onDelete(user_name);
+
+    } catch (error) {
+      console.error('Error deleting this friend request...', error);
+
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <div className="friend-request-container">
       <Link to={user_name}>
         <h2>{user_name}</h2>
       </Link>
       <p>Interest: {interests}</p>
+      <button className='delete-button' onClick = {handleDelete} disabled={isDeleting}> 
+        {isDeleting ? 'Deleting now...' : 'Delete Request'}
+      </button>
     </div>
   );
 }
@@ -25,6 +47,7 @@ FriendReqs.propTypes = {
     user_name: propTypes.string,
     interests: propTypes.string,
   }).isRequired,
+  onDelete: propTypes.func.isRequired,
 };
 
 // Function to convert object of requests to an array
@@ -53,7 +76,7 @@ function FriendReqs() {
   );
   return (
     <div className="wrapper">
-      <h1>Friend Requests</h1>
+      <h1>All Friend Requests</h1>
       {error && <div className="error-message">{error}</div>}
       <div className="request-list">
         {requests.map((request) => <FriendRequest key={request.user_name} request={request} />)}
