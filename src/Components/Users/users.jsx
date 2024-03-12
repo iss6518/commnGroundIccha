@@ -21,7 +21,8 @@ function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
 
   const findUsers = (event) => {
     event.preventDefault();
-    axios.get(USERS_ENDPOINT, {name: name})
+    //axios.get(url, { params: { name: name } })
+    axios.get(USERS_ENDPOINT, { params: {name: name} })
     .then(()=> {
       setError('');
       fetchUsers();
