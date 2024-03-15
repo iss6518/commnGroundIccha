@@ -206,6 +206,10 @@ nav a:focus {
 
 .friend-request-container{
   margin-bottom: 20px;
+  border: 2px solid var(--accent-color);
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  border-radius: 5px;
 }
 
 .delete-button {
@@ -217,7 +221,7 @@ nav a:focus {
 }
 
 .delete-button:disabled {
-  background-color: #b5afaf; 
+  background-color: #ccc7c7; 
   color: #7d0c0c; 
   cursor: not-allowed;
 }
