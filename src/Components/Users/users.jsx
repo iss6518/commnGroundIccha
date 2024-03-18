@@ -117,12 +117,23 @@ function Users() {
     axios.get(USERS_ENDPOINT)
     .then(({data})=> {
       setUsers(usersObjectToArray(data))
+      // if using form (findingUser)
       if(findingUser) {
+        console.log("USING FORM") // this works once press 'SEARCH'
         const filteredByName = users.filter(user => {
           return user.user_name.toLowerCase().includes(findingUser.toLowerCase());
         })
+        // current user is UNDEFINED
+        // needs to be of searched user
+        // then return is fine...
+        // QUESTION: How to get the ?name param and 
+        // then use it to showcase the option (same, toLowerCase)
+        // and fine if duplicate on screen for now...
         setUsers(usersObjectToArray(filteredByName))
+        console.log("SET USERS TEST")
       }
+
+      console.log("NOT USING FORM")
     })
     .catch(() => { setError('Something went wrong'); }); //something bad
   };
