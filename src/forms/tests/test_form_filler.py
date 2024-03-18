@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-import Form.form_filler as ff
+import forms.form_filler as ff
 
 
 def test_get_fld_names():
@@ -15,6 +15,6 @@ def test_get_form_descr():
     assert ff.TEST_FLD in ret
 
 
-@patch('Form.form_filler.get_input', return_value='Y')
+@patch('forms.form_filler.get_input', return_value='Y')
 def test_form(mock_get_input):
     assert isinstance(ff.form(ff.TEST_FLD_DESCRIPS), dict)
