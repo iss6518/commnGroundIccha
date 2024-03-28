@@ -20,13 +20,20 @@ import Friends from './Components/Friends';
 import FriendReqs from './Components/FriendReqs';
 import Users from './Components/Users';
 import Login from './Components/LogIn';
+import LoginBox from './Components/LoginBox.jsx';
 
 function App() {
   return (
     <BrowserRouter>
     <Navbar />
     <Routes>
-      <Route path ="" element={<h1>Home</h1>} />
+    <Route path="/" element={
+          <>
+            <h1>Welcome to CommonGround!</h1>
+            <LoginBox />
+          </>
+        } />
+
       <Route path="login" element={<Login />} />
       <Route path ="friendRequests" element={<FriendReqs/>} />
       <Route path ="friends" element={<Friends/>} />
