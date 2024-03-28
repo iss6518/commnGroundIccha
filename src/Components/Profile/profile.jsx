@@ -8,7 +8,7 @@ function Profile() {
         age: 21,
         interest: 'Artificial Intelligence, Running',
         username: 'robertCS',
-        imageUrl: 'https://pixabay.com/vectors/avatar-icon-placeholder-profile-3814049/'
+        imageUrl: 'https://ibb.co/SX39d9j'
     });
 
     return (
