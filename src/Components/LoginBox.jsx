@@ -17,7 +17,7 @@ function LoginBox() {
           <div className="actions">
             <button type="submit">Login</button>
             <div className="links">
-              <a href="#">Forgot password?</a>
+              <a href="#">New User?</a>
             </div>
           </div>
         </form>

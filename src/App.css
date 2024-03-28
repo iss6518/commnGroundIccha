@@ -6,7 +6,7 @@
 
 html {
   --poppy: hsla(356, 74%, 52%, 1);
-  --cambridge-blue: hsla(132, 27%, 63%, 1);
+  --cambridge-blue: rgb(9, 82, 135);
   --lemon-chiffon: hsla(58, 74%, 85%, 1);
   --buff: hsla(27, 64%, 65%, 1);
   --bistre: hsla(10, 31%, 19%, 1);
@@ -253,7 +253,7 @@ nav a:focus {
 }
 
 .input-group input {
-  width: 100%;
+  width: 90%;
   padding: 8px;
   margin: 8px 0;
 }
@@ -263,8 +263,8 @@ nav a:focus {
 }
 
 .actions button {
-  width: 100%;
-  padding: 10px;
+  width: 80%;
+  padding: 8px;
   background-color: #466aa5; 
   border: none;
   color: white;

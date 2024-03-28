@@ -29,7 +29,9 @@ function App() {
     <Routes>
     <Route path="/" element={
           <>
+            <center>
             <h1>Welcome to CommonGround!</h1>
+            </center>
             <LoginBox />
           </>
         } />
