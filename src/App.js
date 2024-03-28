@@ -29,7 +29,6 @@ function App() {
     <Routes>
     <Route path="/" element={
           <>
-          <div className="welcome-container"></div>
             <h1>Welcome to CommonGround!</h1>
             <LoginBox />
           </>
