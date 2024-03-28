@@ -6,7 +6,7 @@ function Profile() {
     const [profile, setProfile] = useState({
         name: 'Robert',
         age: 21,
-        interest: 'Artificial Intelligence, Running',
+        interest: 'Travelling, Running',
         username: 'robertCS',
         imageUrl: 'https://ibb.co/SX39d9j'
     });
