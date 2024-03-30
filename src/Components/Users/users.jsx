@@ -27,9 +27,10 @@ function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
       console.log("HEREEE")
       console.log(name) // found name here!
 
-
       setError('');
-      fetchUsers();
+      fetchUsers(name); 
+      //** TODO need to pass in the name here
+      // and have it as an OPTIONAL var in fetchUsers ***
     })
     .catch((error) => {
       setError(error.response.data.message);
@@ -117,26 +118,29 @@ function Users() {
     .catch(() => { setError('Something went wrong'); }); //something bad
   };
 
-  const fetchUsers = () => {
+  const fetchUsers = (name) => {
+    //** TO DO: this looks like its working */
+    if(arguments.length == 0){
+      name = "" // in case it's standard fetchUsers & not search a User (form)
+    }
+    else{
+      console.log("NAME HERE: " + name) // got the name!
+    }
     axios.get(USERS_ENDPOINT)
     .then(({data})=> {
       setUsers(usersObjectToArray(data))
       // if using form (findingUser)
       if(findingUser) {
         console.log("USING FORM") // this works once press 'SEARCH'
-        // ATTEMPTING QUERY STRING HERE, NOT USING ANYMORE
-        // const params = new URLSearchParams(window.location.search);
-        // console.log(params.get('users')); // Output: "John"
-
+        // *** TODO: Needs to be specified from name in findUsers function
+        // that we found on click of "Search" ***
+        
+        // QUESTION FOR DARECK: ***
+        // in which part do we add the name from the ADD USER FORM HERE
+        // (which is the name variable) to get it to filter/search by it?
         const filteredByName = users.filter(user => {
           return user.user_name.toLowerCase().includes(findingUser.toLowerCase());
         })
-        // current user is UNDEFINED
-        // needs to be of searched user
-        // then return is fine...
-        // QUESTION: How to get the ?name param and 
-        // then use it to showcase the option (same, toLowerCase)
-        // and fine if duplicate on screen for now...
         setUsers(usersObjectToArray(filteredByName))
         console.log("SET USERS TEST")
       }
