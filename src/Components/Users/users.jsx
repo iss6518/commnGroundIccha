@@ -24,6 +24,10 @@ function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
     //axios.get(url, { params: { name: name } })
     axios.get(USERS_ENDPOINT, { params: {name: name} })
     .then(()=> {
+      console.log("HEREEE")
+      console.log(name) // found name here!
+
+
       setError('');
       fetchUsers();
     })
@@ -120,11 +124,9 @@ function Users() {
       // if using form (findingUser)
       if(findingUser) {
         console.log("USING FORM") // this works once press 'SEARCH'
-        // const queryParameters = new URLSearchParams(window.location.search)
-        // const nameHere = queryParameters.get("users?name")
-        const params = new URLSearchParams(window.location.search);
-
-        console.log(params.get('name')); // Output: "John"
+        // ATTEMPTING QUERY STRING HERE, NOT USING ANYMORE
+        // const params = new URLSearchParams(window.location.search);
+        // console.log(params.get('users')); // Output: "John"
 
         const filteredByName = users.filter(user => {
           return user.user_name.toLowerCase().includes(findingUser.toLowerCase());
