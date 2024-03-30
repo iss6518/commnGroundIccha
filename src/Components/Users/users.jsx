@@ -138,8 +138,15 @@ function Users() {
         // QUESTION FOR DARECK: ***
         // in which part do we add the name from the ADD USER FORM HERE
         // (which is the name variable) to get it to filter/search by it?
+        // NOTE:
+        // before you did findingUser.toLowerCase and that doesn't make sense
+        // because findingUser is a T/F state. So I swapped it w/ name, but 
+        // it still doesn't work. Any thoughts here?
+        // It's not consoling this/getting in here right now... lmk :)
+        // we can work on it tg
         const filteredByName = users.filter(user => {
-          return user.user_name.toLowerCase().includes(findingUser.toLowerCase());
+          console("SUPPP " + user.user_name.toLowerCase().includes(name.toLowerCase()));
+          return user.user_name.toLowerCase().includes(name.toLowerCase());
         })
         setUsers(usersObjectToArray(filteredByName))
         console.log("SET USERS TEST")
