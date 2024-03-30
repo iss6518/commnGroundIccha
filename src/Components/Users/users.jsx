@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router-dom';
 
 
 const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
@@ -120,6 +120,12 @@ function Users() {
       // if using form (findingUser)
       if(findingUser) {
         console.log("USING FORM") // this works once press 'SEARCH'
+        // const queryParameters = new URLSearchParams(window.location.search)
+        // const nameHere = queryParameters.get("users?name")
+        const params = new URLSearchParams(window.location.search);
+
+        console.log(params.get('name')); // Output: "John"
+
         const filteredByName = users.filter(user => {
           return user.user_name.toLowerCase().includes(findingUser.toLowerCase());
         })
