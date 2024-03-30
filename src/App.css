@@ -6,7 +6,7 @@
 
 html {
   --poppy: hsla(356, 74%, 52%, 1);
-  --cambridge-blue: hsla(132, 27%, 63%, 1);
+  --cambridge-blue: rgb(9, 82, 135);
   --lemon-chiffon: hsla(58, 74%, 85%, 1);
   --buff: hsla(27, 64%, 65%, 1);
   --bistre: hsla(10, 31%, 19%, 1);
@@ -206,6 +206,10 @@ nav a:focus {
 
 .friend-request-container{
   margin-bottom: 20px;
+  border: 2px solid var(--accent-color);
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  border-radius: 5px;
 }
 
 .delete-button {
@@ -214,10 +218,99 @@ nav a:focus {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 120px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.delete-button:hover {
+  background-color: #e60000; /* Darker shade for hover state */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.delete-button:active {
+  background-color: #cc0000; /* Even darker shade for active state */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2) inset;
 }
 
 .delete-button:disabled {
-  background-color: #b5afaf; 
+  background-color: #ccc7c7; 
   color: #7d0c0c; 
   cursor: not-allowed;
+}
+
+
+/* Styling Login Box */
+.login-container {
+  background-color: #2d4a6a; 
+  max-width: 300px;
+  margin: auto; /* This centers the div */
+  text-align: center;
+}
+
+.input-group label {
+  display: block;
+}
+
+.input-group input {
+  width: 90%;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.actions button {
+  width: 80%;
+  padding: 8px;
+  background-color: #466aa5; 
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.actions .links {
+  margin-top: 10px;
+}
+
+.actions .links a {
+  color: white;
+  text-decoration: none;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center; 
+}
+
+
+.login-container {
+  margin-top: 20px; 
+}
+
+/* Profile Tab Styling */
+.profile-container {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.profile-details strong {
+  color: #2a2a2a;
 }

@@ -71,7 +71,7 @@ function FriendReqs() {
   useEffect(
     fetchFriendRequests,
     [],
-    // if THIS isempty meaning it'll only
+    // if THIS is empty meaning it'll only
     // be called on initial render of app
   );
   return (
