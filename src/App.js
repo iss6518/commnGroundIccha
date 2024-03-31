@@ -20,7 +20,6 @@ import Friends from './Components/Friends';
 import FriendReqs from './Components/FriendReqs';
 import Users from './Components/Users';
 import Login from './Components/LogIn';
-import LoginBox from './Components/LoginBox.jsx';
 
 function App() {
   return (
@@ -32,7 +31,6 @@ function App() {
             <center>
             <h1>Welcome to CommonGround!</h1>
             </center>
-            <LoginBox />
           </>
         } />
 

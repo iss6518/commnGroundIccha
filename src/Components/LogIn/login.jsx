@@ -35,20 +35,27 @@ function LogInForm({ setError, fetchUser, cancel, visible }) {
   //test
   // if (!visible) return null;
   return(
-    <form>
-        <label htmlFor="name"> 
-          Name
-        </label>
-        <input type="text" id="name" value={name} onChange={changeName}/>
-
-        <label htmlFor="name"> 
-          Password
-        </label>
-        <input type="text" id="name" value={password} onChange={changePassword}/>
-
-        <button type="submit" onClick={logIn}>LogIn</button>
-        <button type="button" onClick={cancel}>Cancel</button>
-    </form>
+    <div className="login-container">
+        <h2>Member Login</h2>
+        <form>
+          <div className="input-group">
+            <label htmlFor="name">Username</label>
+            <input type="text" id="name" value={name} onChange={changeName}/>
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" value={password} onChange={changePassword}/>
+          </div>
+          <div className="actions">
+            <button type="submit" onClick={logIn}>Login</button>
+            <div className="links">
+              <a href="createAccount">New User?</a>
+            </div>
+            <div className="links">
+            </div>
+          </div>
+        </form>
+      </div>
   );
 }
 
