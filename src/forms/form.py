@@ -30,8 +30,17 @@ GLOSSARY_FORM_FLDS = [
 ]
 
 
+FIND_USER_FORM_FLDS = [
+    {
+        FLD_NM: 'Name',
+        ff.QSTN: 'Enter name to find specific user',
+        ff.INSTRUCTIONS: True,
+    }
+]
+
+
 def get_form() -> list:
-    return GLOSSARY_FORM_FLDS
+    return GLOSSARY_FORM_FLDS, FIND_USER_FORM_FLDS
 
 
 def get_form_descr() -> dict:

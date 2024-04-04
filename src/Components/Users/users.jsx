@@ -144,11 +144,13 @@ function Users() {
         // it still doesn't work. Any thoughts here?
         // It's not consoling this/getting in here right now... lmk :)
         // we can work on it tg
+        console.log("BEFORE FILTER")
         const filteredByName = users.filter(user => {
           console("SUPPP " + user.user_name.toLowerCase().includes(name.toLowerCase()));
           return user.user_name.toLowerCase().includes(name.toLowerCase());
         })
-        setUsers(usersObjectToArray(filteredByName))
+        console.log("DONE W FILTER " + filteredByName)
+        setUsers(usersObjectToArray(name))
         console.log("SET USERS TEST")
       }
 
