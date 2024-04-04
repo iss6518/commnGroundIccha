@@ -6,6 +6,39 @@ import { Link } from 'react-router-dom';
 const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
 const FRIENDS_ENDPOINT = `http://127.0.0.1:8000/matches`;
 
+
+function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
+    const [name, setName] = useState('');
+  
+    const changeName = (event) => {setName(event.target.value);};
+  
+    const findUsers = (event) => {
+      event.preventDefault();
+      fetchUsers(name);
+    };
+  
+    if (!visible) return null;
+    return(
+    <form>
+        <label htmlFor="name"> 
+            Search
+        </label>
+        <input required type="text" id="name" value={name} onChange={changeName}/>
+
+        <button type="submit" onClick={findUsers}>Search</button>
+        <button type="button" onClick={cancel}>Cancel</button>
+    </form>
+    );
+  }
+  
+  UserSearchForm.propTypes = {
+    visible: propTypes.bool.isRequired,
+    cancel: propTypes.func.isRequired,
+    fetchUsers: propTypes.func.isRequired,
+    setError: propTypes.func.isRequired,
+  };
+  
+
 function User({ user, addFriend }) {
   const { user_name, interests } = user;
 
@@ -48,11 +81,21 @@ function usersObjectToArray({Data}) {
 function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
+  const [searchName, setSearchName] = useState('');
 
-  const fetchUsers = () => {
+  
+  const handleSearch = (name) => {
+    setSearchName(name);
+    // console.log(searchName)
+    fetchUsers(name);
+  };
+  
+  const fetchUsers = (name = '') => {
+    // `${USERS_ENDPOINT}?name=${name}`
     axios.get(USERS_ENDPOINT)
       .then(({ data }) => {
         setUsers(usersObjectToArray(data));
+        console.log(searchName)
       })
       .catch(() => {
         setError('Something went wrong');
@@ -77,14 +120,16 @@ function Users() {
   };
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    fetchUsers(searchName);
+}, [searchName]);
 
   return (
     <div className="wrapper">
       <header>
         <h1>All users</h1>
       </header>
+
+      <UserSearchForm visible fetchUsers={handleSearch} setError={setError} />
 
       {error && <div className="error-message">{error}</div>}
 
