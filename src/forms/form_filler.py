@@ -3,7 +3,7 @@
 A utility for filling in a form in a notebook or
 from the command line.
 """
-FLD_NM = None
+FLD_NM = 'fld_nm'
 QSTN = 'question'
 DESCR = 'description'
 INSTRUCTIONS = 'instructions'
