@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
-const FRIENDS_ENDPOINT = `http://127.0.0.1:8000/matches`;
+const FRIENDREQ_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
 
 
 function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
@@ -109,7 +109,7 @@ function Users() {
     console.log(currUser)
     console.log(friendToAdd)
 
-    axios.post(FRIENDS_ENDPOINT, {params: { currUser, friendToAdd }})
+    axios.post(FRIENDREQ_ENDPOINT, {params: { currUser, friendToAdd }})
       .then(() => {
         console.log('Friend added successfully');
       })
