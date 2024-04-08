@@ -368,3 +368,18 @@ html, body, #root {
   margin: 0;
 }
 
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 0px;
+  width: 2000px; 
+}
+
+.image-container img {
+  max-width: 100%; 
+  height: auto; 
+  border-radius: 10px;
+  max-width: 2000px; 
+  margin-left: 1600px; /* Adds space to the left of the image */
+}

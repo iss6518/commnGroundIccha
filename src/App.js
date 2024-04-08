@@ -29,7 +29,7 @@ function App() {
     <Routes>
     <Route path="/" element={
           <>
-          
+            
             <div className="welcome-message">
             <center><h1>Welcome to <span className="highlight">CommonGround!</span></h1></center>
             </div>
@@ -46,7 +46,9 @@ function App() {
               </div>
             </div>
 
-
+            <div className="image-container">
+            <img src="https://media.istockphoto.com/id/1383122126/vector/vector-illustration-of-an-abstract-scheme-which-contains-people-icons.jpg?s=612x612&w=0&k=20&c=dELp5546VC94zdiX8i2M1xzs2TNCE_3MKppbFZhduBs=" alt="Connect with others today!" />
+            </div>
           </>
             
 
