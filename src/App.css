@@ -330,6 +330,11 @@ center h1 {
   color: #2e6bc1; 
 }
 
+.content-section .highlight {
+  color: #2e6bc1; 
+}
+
+
 .homepage-container {
   display: flex;
   flex-direction: column;
@@ -370,10 +375,9 @@ html, body, #root {
 
 .image-container {
   display: flex;
-  justify-content: center;
-  align-items: center; 
-  height: 0px;
-  width: 2000px; 
+  justify-content: center; 
+  width: 1100px; 
+  margin-top: -20px;
 }
 
 .image-container img {
@@ -381,5 +385,7 @@ html, body, #root {
   height: auto; 
   border-radius: 10px;
   max-width: 2000px; 
-  margin-left: 1600px; /* Adds space to the left of the image */
+  margin-left: 1500px; /* Adds space to the left of the image */
+  position:relative;
+  top: -280px;
 }

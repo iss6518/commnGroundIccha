@@ -29,7 +29,7 @@ function App() {
     <Routes>
     <Route path="/" element={
           <>
-            
+
             <div className="welcome-message">
             <center><h1>Welcome to <span className="highlight">CommonGround!</span></h1></center>
             </div>
@@ -37,7 +37,7 @@ function App() {
 
             <div className="homepage-container">
             <div className="content-section">
-            <h2 className="headline">CommonGround is a platform that connects people with shared interests and goals!</h2>
+            <h2 className="headline">  <span className="highlight">CommonGround</span> is a platform that connects people with shared interests and goals!</h2>
             
             <p className="subtext">
                   Its versatility acts as a mentorship, hobby sharing, or partner matching tool
