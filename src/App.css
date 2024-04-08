@@ -315,17 +315,56 @@ nav a:focus {
   color: #2a2a2a;
 }
 
-.description-box {
-  width: 80%; 
-  margin: 20px auto; 
-  padding: 20px;
-  background-color: #f0f8ff; 
-  border-radius: 8px; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6; 
-}
 
 center h1 {
-  margin-bottom: 20px; 
+  margin-bottom: 10px; 
 }
+
+.welcome-message h1 {
+  color: #736d6d; 
+  margin-bottom: 50px; 
+  font-size: 3rem;
+}
+
+.welcome-message .highlight {
+  color: #2e6bc1; 
+}
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  max-width: 2200px;
+  margin: auto;
+  padding: 20px;
+  justify-content: center; /* This will vertically center your content */
+  align-items: flex-start; /* Align items to the start of the container, which is the left side */
+  height: 40vh; /* This will make the container take up the full height of the viewport */
+  padding-top: 5vh; /* This will push the content down slightly */
+}
+
+.content-section {
+  margin-top: 20px; 
+}
+
+.headline {
+  font-size: 3rem; 
+  color: #424141; 
+  width: 50%; 
+  text-align: left; 
+  margin-bottom: 0.5rem; 
+}
+
+.subtext {
+  font-size: 1.2rem; 
+  color: #666; 
+  text-align: left; 
+  width: 60%; 
+  margin-bottom: 2rem; 
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+

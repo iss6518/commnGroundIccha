@@ -29,14 +29,27 @@ function App() {
     <Routes>
     <Route path="/" element={
           <>
-            <center><h1>Welcome to CommonGround!</h1></center>
-            <div className="description-box">
-            <p>CommonGround is a platform that connects people with shared interests 
-              and goals. It is a versatile application that acts as a mentorship,
-              hobby sharing, or partner matching tool. 
-              </p>
+          
+            <div className="welcome-message">
+            <center><h1>Welcome to <span className="highlight">CommonGround!</span></h1></center>
             </div>
+
+
+            <div className="homepage-container">
+            <div className="content-section">
+            <h2 className="headline">CommonGround is a platform that connects people with shared interests and goals!</h2>
+            
+            <p className="subtext">
+                  Its versatility acts as a mentorship, hobby sharing, or partner matching tool
+                </p>
+
+              </div>
+            </div>
+
+
           </>
+            
+
         } />
 
       <Route path="login" element={<Login />} />
