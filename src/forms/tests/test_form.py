@@ -1,5 +1,5 @@
 """
-Tests for forms/form.py.
+Tests for form.py.
 """
 import forms.form as fm
 
