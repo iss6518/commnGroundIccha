@@ -29,9 +29,13 @@ function App() {
     <Routes>
     <Route path="/" element={
           <>
-            <center>
-            <h1>Welcome to CommonGround!</h1>
-            </center>
+            <center><h1>Welcome to CommonGround!</h1></center>
+            <div className="description-box">
+            <p>CommonGround is a platform that connects people with shared interests 
+              and goals. It is a versatile application that acts as a mentorship,
+              hobby sharing, or partner matching tool. 
+              </p>
+            </div>
           </>
         } />
 

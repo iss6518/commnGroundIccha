@@ -314,3 +314,18 @@ nav a:focus {
 .profile-details strong {
   color: #2a2a2a;
 }
+
+.description-box {
+  width: 80%; 
+  margin: 20px auto; 
+  padding: 20px;
+  background-color: #f0f8ff; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6; 
+}
+
+center h1 {
+  margin-bottom: 20px; 
+}
