@@ -43,6 +43,7 @@ function Friends() { //fetching from backend
     {friends.map((friend) => (
       <div className="user-container">
         <h2>{friend.user_name}</h2>
+        <button className="msgFriend"> Message Friend </button>
         <button className="removeFriendBtn"> Remove Friend </button>
       </div>
     ))}

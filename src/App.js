@@ -20,7 +20,7 @@ import Friends from './Components/Friends';
 import FriendReqs from './Components/FriendReqs';
 import Users from './Components/Users';
 import Login from './Components/LogIn';
-import CreateAccount from './Components/createAccount';
+import CreateAccountForm from './Components/createAccount';
 
 function App() {
   return (
@@ -55,7 +55,7 @@ function App() {
         } />
 
       <Route path="login" element={<Login />} />
-      <Route path="createaccount" element={<CreateAccount />} />
+      <Route path="createaccount" element={<CreateAccountForm />} />
       <Route path ="friendRequests" element={<FriendReqs/>} />
       <Route path ="friends" element={<Friends/>} />
       <Route path ="profile" element={<Profile/>} />

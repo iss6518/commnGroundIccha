@@ -109,7 +109,7 @@ function Users() {
     console.log(currUser)
     console.log(friendToAdd)
 
-    axios.post(FRIENDREQ_ENDPOINT, {params: { currUser, friendToAdd }})
+    axios.post(FRIENDREQ_ENDPOINT, { currUser, friendToAdd })
       .then(() => {
         console.log('Friend added successfully');
       })
