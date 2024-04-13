@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
-// import { BACKEND_URL } from '../../constants';
+import { BACKEND_URL } from '../../constants';
 
 //import { useNavigate, Link } from 'react-router-dom';
 //import {useDispatch} from 'react-redux'
 
-const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
-// const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
 function LogInForm({ setError, fetchUser, cancel, visible }) {
   // initial state is empty for both name and password

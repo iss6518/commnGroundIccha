@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { BACKEND_URL } from '../../constants';
 
-const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
-const FRIENDREQ_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
+const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+console.log("this is backend url: ", USERS_ENDPOINT)
+const FRIENDREQ_ENDPOINT = `${BACKEND_URL}/friendRequest`;
+// const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
+// const FRIENDREQ_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
 
 
 function UserSearchForm({ setError, fetchUsers, cancel, visible }) {
@@ -103,13 +107,13 @@ function Users() {
   };
 
   const addFriend = (userToAdd) => {
-    const currUser = 'cloudDave'; // test user account until we figure out login
-    const friendToAdd = userToAdd.user_name;
+    const user_name = 'cloudDave'; // test user account until we figure out login
+    const other_user = userToAdd.user_name;
 
-    console.log(currUser)
-    console.log(friendToAdd)
+    console.log(user_name)
+    console.log(other_user)
 
-    axios.post(FRIENDREQ_ENDPOINT, { currUser, friendToAdd })
+    axios.post(FRIENDREQ_ENDPOINT, { user_name, other_user })
       .then(() => {
         console.log('Friend added successfully');
       })

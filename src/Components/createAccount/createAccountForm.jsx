@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { BACKEND_URL } from '../../constants';
 
-const USERS_ENDPOINT = `http://127.0.0.1:8000/users`;
+const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
 function CreateAccountForm({ onSubmit }) {
 

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { BACKEND_URL } from '../../constants';
 
-
-const FRIEND_REQUESTS_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
-const ACCEPT_FRIEND_REQUESTS_ENDPOINT = `http://127.0.0.1:8000/friendRequestAccept`;
+const FRIEND_REQUESTS_ENDPOINT = `${BACKEND_URL}/friendRequest`;
+const ACCEPT_FRIEND_REQUESTS_ENDPOINT = `${BACKEND_URL}/friendRequestAccept`;
 
 // Component to display a single friend request
 //We also add ability to delete a friend request
