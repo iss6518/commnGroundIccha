@@ -38,9 +38,21 @@ FIND_USER_FORM_FLDS = [
     }
 ]
 
+LOGIN_FORM_FLDS = [
+    {
+        FLD_NM: 'Username',
+        ff.QSTN: 'Enter username as part of login',
+        ff.INSTRUCTIONS: True,
+    },
+    {
+        FLD_NM: 'Password',
+        ff.QSTN: 'Enter password as part of login',
+        ff.INSTRUCTIONS: True,
+    }
+]
 
 def get_form() -> list:
-    return GLOSSARY_FORM_FLDS, FIND_USER_FORM_FLDS
+    return GLOSSARY_FORM_FLDS
 
 
 def get_form_descr() -> dict:
