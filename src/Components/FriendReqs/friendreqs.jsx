@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { BACKEND_URL } from '../../constants';
 
-
-const FRIEND_REQUESTS_ENDPOINT = `http://127.0.0.1:8000/friendRequest`;
+const FRIEND_REQUESTS_ENDPOINT = `${BACKEND_URL}/friendRequest`;
+const ACCEPT_FRIEND_REQUESTS_ENDPOINT = `${BACKEND_URL}/friendRequestAccept`;
 
 // Component to display a single friend request
 //We also add ability to delete a friend request
-function FriendRequest({ request, onDelete }) {
+function FriendRequest({ request, onDelete, onAccept }) {
   const { user_name, interests } = request;
   const [isDeleting, setDeleting] = useState(false);
+  const [isAccepting, setAccepting] = useState(false);
 
   const handleDelete = async () => {
     try {
@@ -28,12 +30,30 @@ function FriendRequest({ request, onDelete }) {
     }
   };
 
+  const handleAccept = async () => {
+    try {
+      setAccepting(true);
+
+      // calling endpoint to accept the friend request
+      await axios.put(ACCEPT_FRIEND_REQUESTS_ENDPOINT + '/' + user_name);
+      onAccept(user_name);
+
+    } catch (error) {
+      console.error('Error accepting this friend request...', error);
+
+    } finally {
+      setAccepting(false);
+    }
+  };
+
   return (
     <div className="friend-request-container">
       <Link to={user_name}>
         <h2>{user_name}</h2>
       </Link>
-      <p>Interest: {interests}</p>
+      <button className='accept-button' onClick = {handleAccept} disabled={isAccepting}> 
+        {isAccepting ? 'Accepting now...' : 'Accept Request'}
+      </button>
       <button className='delete-button' onClick = {handleDelete} disabled={isDeleting}> 
         {isDeleting ? 'Deleting now...' : 'Delete Request'}
       </button>

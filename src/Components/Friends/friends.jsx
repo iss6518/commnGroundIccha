@@ -3,8 +3,7 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
 
-// const USERS_ENDPOINT = `${BACKEND_URL}/users`;
-const USERS_ENDPOINT = "http://127.0.0.1:8000/matches"
+const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
 function Friends() { //fetching from backend
   const [error, setError] = useState('');
@@ -43,6 +42,7 @@ function Friends() { //fetching from backend
     {friends.map((friend) => (
       <div className="user-container">
         <h2>{friend.user_name}</h2>
+        <button className="msgFriend"> Message Friend </button>
         <button className="removeFriendBtn"> Remove Friend </button>
       </div>
     ))}

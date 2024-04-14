@@ -1,3 +1,3 @@
-import CreateAccount from './createaccount';
+import CreateAccountForm from "./createAccountForm";
 
-export default CreateAccount;
+export default CreateAccountForm;

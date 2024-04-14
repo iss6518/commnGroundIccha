@@ -314,3 +314,78 @@ nav a:focus {
 .profile-details strong {
   color: #2a2a2a;
 }
+
+
+center h1 {
+  margin-bottom: 10px; 
+}
+
+.welcome-message h1 {
+  color: #736d6d; 
+  margin-bottom: 50px; 
+  font-size: 3rem;
+}
+
+.welcome-message .highlight {
+  color: #2e6bc1; 
+}
+
+.content-section .highlight {
+  color: #2e6bc1; 
+}
+
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  max-width: 2200px;
+  margin: auto;
+  padding: 20px;
+  justify-content: center; /* This will vertically center your content */
+  align-items: flex-start; /* Align items to the start of the container, which is the left side */
+  height: 40vh; /* This will make the container take up the full height of the viewport */
+  padding-top: 5vh; /* This will push the content down slightly */
+}
+
+.content-section {
+  margin-top: 20px; 
+}
+
+.headline {
+  font-size: 3rem; 
+  color: #424141; 
+  width: 50%; 
+  text-align: left; 
+  margin-bottom: 0.5rem; 
+}
+
+.subtext {
+  font-size: 1.2rem; 
+  color: #666; 
+  text-align: left; 
+  width: 60%; 
+  margin-bottom: 2rem; 
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center; 
+  width: 1100px; 
+  margin-top: -20px;
+}
+
+.image-container img {
+  max-width: 100%; 
+  height: auto; 
+  border-radius: 10px;
+  max-width: 2000px; 
+  margin-left: 1500px; /* Adds space to the left of the image */
+  position:relative;
+  top: -280px;
+}

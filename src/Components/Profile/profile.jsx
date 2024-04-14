@@ -8,7 +8,7 @@ function Profile() {
         age: 21,
         interest: 'Travelling, Running',
         username: 'robertCS',
-        imageUrl: 'https://ibb.co/SX39d9j'
+        imageUrl: 'https://stock.adobe.com/images/default-profile-picture/215844325'
     });
 
     return (
