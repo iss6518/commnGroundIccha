@@ -7,21 +7,23 @@ import { BACKEND_URL } from '../../constants';
 //import {useDispatch} from 'react-redux'
 
 const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+console.log(USERS_ENDPOINT)
 
-function LogInForm({ setError, fetchUser, cancel, visible }) {
+function LogInForm() {
   // initial state is empty for both name and password
-  const [name, setName] = useState('');
+  const [user_name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   // functions to handle user inputs for username & password (triggered on state change) 
   const changeName = (event) => { setName(event.target.value); };
   const changePassword = (event) => { setPassword(event.target.value); };
 
+  /*
   // function to handle submit ("log in") button
   const logIn = (event) => {
     event.preventDefault(); // default when submitting form is to reload page & we don't want that
-
-    axios.post(USERS_ENDPOINT, { name: name, password: password })
+    axios.get(USERS_ENDPOINT, { user_name: name, password: password })
     .then(() => {
       setError('');
       fetchUser();
@@ -30,23 +32,40 @@ function LogInForm({ setError, fetchUser, cancel, visible }) {
       setError(error.response.data.message);
     });
   };
-  
-  //test
-  // if (!visible) return null;
+  */
+
+  const logIn = async (filter) => {
+    try {
+      console.log('filter: ', filter)
+      const response = await axios.get(USERS_ENDPOINT, filter);
+      console.log("success: ", response);
+    } catch (error) {
+      setError("There was a problem adding the user.");
+    }
+  };
+
+
+  // called when create account button is pressed
+  const handleLogIn = (event) => {
+    event.preventDefault();
+    logIn({user_name, password});
+    // need to set session to this user here
+  };
+
   return(
     <div className="login-container">
         <h2>Member Login</h2>
         <form>
           <div className="input-group">
             <label htmlFor="name">Username</label>
-            <input type="text" id="name" value={name} onChange={changeName}/>
+            <input type="text" id="user_name" value={user_name} onChange={changeName}/>
           </div>
           <div className="input-group">
             <label htmlFor="password">Password</label>
             <input type="password" id="password" value={password} onChange={changePassword}/>
           </div>
           <div className="actions">
-            <button type="submit" onClick={logIn}>Login</button>
+            <button type="submit" onClick={handleLogIn}>Login</button>
             <div className="links">
               <a href="createAccount">New User?</a>
             </div>
@@ -58,15 +77,7 @@ function LogInForm({ setError, fetchUser, cancel, visible }) {
   );
 }
 
-// for adding cancel/visible
-// **** TODO need to figure this out
-LogInForm.propTypes = {
-  visible: propTypes.bool.isRequired,
-  cancel: propTypes.func.isRequired,
-  fetchUser: propTypes.func.isRequired,
-  setError: propTypes.func.isRequired,
-};
-
+/*
 function Login() { //fetching from backend
   const [error, setError] = useState('');
 
@@ -108,5 +119,6 @@ function Login() { //fetching from backend
   </div>
   );
 }
+*/
 
-export default Login;
+export default LogInForm;
