@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BACKEND_URL } from '../../constants';
 
 const USERS_ENDPOINT = `${BACKEND_URL}/users`;
@@ -14,12 +14,29 @@ function CreateAccountForm({ onSubmit }) {
 
   // initial state is empty for both name and password
   const [user_name, setName] = useState('');
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [interests, setInterest] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [genderOptions, setGenderOptions] = useState([]); // State for gender options
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+
+  useEffect(() => {
+    // Fetch gender options from backend
+    const fetchGenderOptions = async () => {
+      try {
+        const { data } = await axios.get(`${BACKEND_URL}/gender-options`);
+        setGenderOptions(data.options);
+      } catch (error) {
+        setError("Error fetching gender options.");
+      }
+    };
+
+    fetchGenderOptions();
+  }, []);
 
   // functions to handle user inputs for username & password (triggered on state change) 
   const changeName = (event) => { setName(event.target.value); };
@@ -81,13 +98,16 @@ function CreateAccountForm({ onSubmit }) {
           />
 
           <label htmlFor="gender">Gender(optional): </label>
-          <input
-            type="text"
-            id="gender"
-            value={gender}
-            onChange={changeGender}
-            name="gender"
-          />
+          <select
+          id="gender"
+          value={gender}
+          onChange={changeGender}
+        >
+          <option value="">Select Gender</option>
+          {genderOptions.map((option) => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
 
           <label htmlFor="interests">Interests: </label>
           <input
