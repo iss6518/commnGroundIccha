@@ -389,3 +389,19 @@ html, body, #root {
   position:relative;
   top: -280px;
 }
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%; /* This makes the input take the full width of the form group */
+  padding: .5rem;
+  margin-bottom: .5rem; /* Adds some space after the input/select */
+}

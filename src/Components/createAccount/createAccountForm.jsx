@@ -29,7 +29,7 @@ function CreateAccountForm({ onSubmit }) {
     const fetchGenderOptions = async () => {
       try {
         const { data } = await axios.get(`${BACKEND_URL}/gender-options`);
-        setGenderOptions(data.options);
+        setGenderOptions(data.gender_options);
       } catch (error) {
         setError("Error fetching gender options.");
       }
@@ -67,7 +67,8 @@ function CreateAccountForm({ onSubmit }) {
         <h2>Member Registration</h2>
 
         <form>
-          <label htmlFor="user_name">Username: </label>
+        <div className="form-group">
+          <label htmlFor="user_name">Username:</label>
           <input
             type="text"
             id="user_name"
@@ -76,8 +77,10 @@ function CreateAccountForm({ onSubmit }) {
             name="user_name"
             required
           />
+        </div>
 
-          <label htmlFor="email">Email: </label>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
           <input
             type="text"
             id="email"
@@ -86,8 +89,10 @@ function CreateAccountForm({ onSubmit }) {
             name="email"
             required
           />
+        </div>
 
-          <label htmlFor="age">Age: </label>
+        <div className="form-group">
+          <label htmlFor="age">Age:</label>
           <input
             type="number"
             id="age"
@@ -96,20 +101,25 @@ function CreateAccountForm({ onSubmit }) {
             name="age"
             required
           />
+        </div>
 
-          <label htmlFor="gender">Gender(optional): </label>
+        <div className="form-group">
+          <label htmlFor="gender">Gender (optional):</label>
           <select
-          id="gender"
-          value={gender}
-          onChange={changeGender}
-        >
-          <option value="">Select Gender</option>
-          {genderOptions.map((option) => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+            id="gender"
+            value={gender}
+            onChange={changeGender}
+            required
+          >
+            <option value="" disabled>Select Gender</option>
+            {genderOptions && genderOptions.length > 0 && genderOptions.map((option) => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
 
-          <label htmlFor="interests">Interests: </label>
+        <div className="form-group">
+          <label htmlFor="interests">Interests:</label>
           <input
             type="text"
             id="interests"
@@ -118,8 +128,10 @@ function CreateAccountForm({ onSubmit }) {
             name="interests"
             required
           />
+        </div>
 
-          <label htmlFor="password">Password: </label>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
           <input
             type="text"
             id="password"
@@ -128,13 +140,14 @@ function CreateAccountForm({ onSubmit }) {
             name="password"
             required
           />
+        </div>
 
-          <button type="submit" onClick={handleSubmit}>Create Account</button>
-          <div className="links">
-              <a href="login">Log In</a>
-          </div>
-        </form>
-      </div>
+        <button type="submit" onClick={handleSubmit}>Create Account</button>
+        <div className="links">
+          <a href="/login">Log In</a> {/* Adjust the link as needed */}
+        </div>
+      </form>
+    </div>
   );
 }
 
