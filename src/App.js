@@ -21,6 +21,7 @@ import FriendReqs from './Components/FriendReqs';
 import Users from './Components/Users';
 import Login from './Components/LogIn';
 import CreateAccountForm from './Components/createAccount';
+import FormBuilder from './forms/formBuilder'; 
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
 
       <Route path="login" element={<Login />} />
       <Route path="createaccount" element={<CreateAccountForm />} />
+      <Route path="form-builder" element={<FormBuilder />} /> 
       <Route path ="friendRequests" element={<FriendReqs/>} />
       <Route path ="friends" element={<Friends/>} />
       <Route path ="profile" element={<Profile/>} />

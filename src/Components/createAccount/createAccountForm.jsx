@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BACKEND_URL } from '../../constants';
 
-const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+//const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
 /*
 TODO: 
@@ -10,145 +10,92 @@ TODO:
 * need to redirect to login page once user creates account
 */
 
-function CreateAccountForm({ onSubmit }) {
-
-  // initial state is empty for both name and password
-  const [user_name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [interests, setInterest] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [genderOptions, setGenderOptions] = useState([]); // State for gender options
+function CreateAccountForm() {
+  const [formFields, setFormFields] = useState([]);
+  const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
 
   useEffect(() => {
-    // Fetch gender options from backend
-    const fetchGenderOptions = async () => {
+    // Fetch form structure from backend
+    const fetchFormStructure = async () => {
       try {
-        const { data } = await axios.get(`${BACKEND_URL}/gender-options`);
-        setGenderOptions(data.gender_options);
+        const { data } = await axios.get(`${BACKEND_URL}/form-structure`);
+        if (Array.isArray(data.data.fields)) {
+          setFormFields(data.data.fields);
+          initializeFormData(data.data.fields);
+        } else {
+          throw new Error('Form structure is not an array.');
+        }
       } catch (error) {
-        setError("Error fetching gender options.");
+        console.error(error);
+        setError("Failed to fetch form structure.");
       }
     };
 
-    fetchGenderOptions();
-  }, []);
+  fetchFormStructure();
+}, []);
+  // Initialize form data based on fetched form structure
+  const initializeFormData = (fields) => {
+    const initialData = {};
+    fields.forEach(field => {
+      initialData[field.fld_nm] = field.default || '';
+    });
+    setFormData(initialData);
+  };
 
-  // functions to handle user inputs for username & password (triggered on state change) 
-  const changeName = (event) => { setName(event.target.value); };
-  const changeAge = (event) => { setAge(event.target.value); };
-  const changeGender = (event) => { setGender(event.target.value); };
-  const changeInterest = (event) => { setInterest(event.target.value); };
-  const changeEmail = (event) => { setEmail(event.target.value); };
-  const changePassword = (event) => { setPassword(event.target.value); };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-  
-  const createAccount = async (data) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(USERS_ENDPOINT, data);
-      console.log("success: ", response.data);
+      const response = await axios.post(`${BACKEND_URL}/users`, formData);
+      // Handle success
+      console.log("Form submitted:", response.data);
     } catch (error) {
-      setError("There was a problem adding the user.");
+      // Handle error
+      setError("Failed to submit form.");
     }
   };
 
-  // called when create account button is pressed
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    createAccount({user_name, age, gender, interests, email, password});
-  };
-
   return (
-      <div className="login-container">
-        <h2>Member Registration</h2>
-
-        <form>
-        <div className="form-group">
-          <label htmlFor="user_name">Username:</label>
-          <input
-            type="text"
-            id="user_name"
-            value={user_name}
-            onChange={changeName}
-            name="user_name"
-            required
-          />
+    <div className="login-container">
+      <h2>Member Registration</h2>
+      <form onSubmit={handleSubmit}>
+        {Array.isArray(formFields) && formFields.map(field => (
+          <div key={field.fld_nm} className="form-group">
+            <label htmlFor={field.fld_nm}>{field.qstn}</label>
+            {field.type === 'select' ? (
+            <select
+              id={field.fld_nm}
+              name={field.fld_nm}
+              value={formData[field.fld_nm]}
+              onChange={handleInputChange}
+            >
+              <option value="">Select {field.qstn}</option> {/* Placeholder option */}
+              {field.choices && field.choices.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type={field.type}
+              id={field.fld_nm}
+              name={field.fld_nm}
+              value={formData[field.fld_nm]}
+              onChange={handleInputChange}
+            />
+          )}
         </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            id="email"
-            value={email}
-            onChange={changeEmail}
-            name="email"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="age">Age:</label>
-          <input
-            type="number"
-            id="age"
-            value={age}
-            onChange={changeAge}
-            name="age"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="gender">Gender (optional):</label>
-          <select
-            id="gender"
-            value={gender}
-            onChange={changeGender}
-            required
-          >
-            <option value=""  disabled>Select Gender</option>
-            {genderOptions && genderOptions.length > 0 && genderOptions.map((option) => (
-              <option key={option} value={option}>{option}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="interests">Interests:</label>
-          <input
-            type="text"
-            id="interests"
-            value={interests}
-            onChange={changeInterest}
-            name="interests"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="text"
-            id="password"
-            value={password}
-            onChange={changePassword}
-            name="password"
-            required
-          />
-        </div>
-
-        <button type="submit" onClick={handleSubmit}>Create Account</button>
-        <div className="links">
-          <a href="/login">Log In</a> {/* Adjust the link as needed */}
-        </div>
-      </form>
-    </div>
-  );
+      ))}
+      <button type="submit">Create Account</button>
+    </form>
+    {error && <div className="error">{error}</div>}
+  </div>
+);
 }
 
 export default CreateAccountForm;
