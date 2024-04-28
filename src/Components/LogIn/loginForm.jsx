@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
+import { useNavigate } from 'react-router-dom';
 
 //import { useNavigate, Link } from 'react-router-dom';
 //import {useDispatch} from 'react-redux'
@@ -15,6 +16,9 @@ function LogInForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const navigate = useNavigate();
+  const [sessionData, setSessionData] = useState(null); // Define sessionData state
+
   // functions to handle user inputs for username & password (triggered on state change) 
   const changeEmail = (event) => { setEmail(event.target.value); };
   const changePassword = (event) => { setPassword(event.target.value); };
@@ -24,6 +28,9 @@ function LogInForm() {
       console.log('filter: ', filter)
       const response = await axios.post(LOGIN_ENDPOINT, filter);
       console.log("success: ", response); // response object is the user session
+      setSessionData(response.data);
+      // <Navigate to="/profile" /> // for now. TODO: might want to redirect to a new home page with logged in
+      navigate("/profile", { state: { sessionData: response.data } })
     } catch (error) {
       setError("There was a problem adding the user.");
     }
