@@ -407,16 +407,25 @@ html, body, #root {
 }
 
 .link-button {
-  background-color: var(--cambridge-blue);
-  color: var(--off-white);
-  padding: 10px 15px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
   font-size: 16px;
+  padding: 12px 24px;
+  margin: 10px;
+  border: 2px solid var(--cambridge-blue);
+  border-radius: 5px;
+  color: var(--off-white);
+  background-color: var(--cambridge-blue);
   cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.link-button:hover {
+.link-button:hover, .link-button:focus {
   background-color: var(--poppy);
+  color: var(--off-white);
+  border-color: var(--poppy);
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
 }
