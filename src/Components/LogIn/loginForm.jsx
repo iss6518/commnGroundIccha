@@ -50,6 +50,7 @@ function LogInForm() {
     event.preventDefault();
     logIn({user_name, password});
     // need to set session to this user here
+    // need to have a developer account and regular user account
   };
 
   return(
