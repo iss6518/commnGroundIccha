@@ -52,6 +52,7 @@ function CreateAccountForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData)
       const response = await axios.post(`${BACKEND_URL}/users`, formData);
       // Handle success
       console.log("Form submitted:", response.data);

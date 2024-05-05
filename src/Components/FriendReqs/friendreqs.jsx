@@ -66,8 +66,8 @@ FriendReqs.propTypes = {
   request: propTypes.shape({
     user_name: propTypes.string,
     interests: propTypes.string,
-  }).isRequired,
-  onDelete: propTypes.func.isRequired,
+  }),
+  onDelete: propTypes.func,
 };
 
 // Function to convert object of requests to an array
