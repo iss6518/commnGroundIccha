@@ -102,8 +102,8 @@ const FriendReqs = ({ sessionData }) => {
     // get logged in user
     const currUser = sessionData.session.user_name
     // only display FRR list for this user
-    axios.get(FRIEND_REQUESTS_ENDPOINT + '/' + currUser)
-    // axios.get(FRIEND_REQUESTS_ENDPOINT)
+    //axios.get(FRIEND_REQUESTS_ENDPOINT + '/' + currUser)
+    axios.get(FRIEND_REQUESTS_ENDPOINT)
       .then(({ data }) => setRequests(requestsObjectToArray(data)))
       .catch(() => setError('Something went wrong fetching friend requests.'));
   };

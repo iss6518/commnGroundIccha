@@ -17,7 +17,7 @@ import CreateAccountForm from './Components/createAccount';
 import FormBuilder from './forms/formBuilder'; 
 
 // Extracted Home component with useNavigate
-function Home() {
+function Home({ sessionData }) {
   const navigate = useNavigate();
 
   return (
@@ -32,10 +32,12 @@ function Home() {
             Its versatility acts as a mentorship, hobby sharing, or partner matching tool
           </p>
           {/* Buttons for Login and Create Account */}
-          <div className="button-container">
-            <button onClick={() => navigate('/login')} className="link-button">Login</button>
-            <button onClick={() => navigate('/createAccount')} className="link-button">Create Account</button>
-          </div>
+          {!sessionData ? (
+            <div className="button-container">
+              <button onClick={() => navigate('/profile')} className="link-button">Profile</button>
+              <button onClick={() => navigate('/friends')} className="link-button">Friends</button>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="image-container">
@@ -52,7 +54,7 @@ function App() {
     <BrowserRouter>
       <Navbar sessionData={sessionData} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home sessionData={sessionData} />} />
         <Route path="login" element={<Login setSessionData={setSessionData} />} />
         <Route path="createaccount" element={<CreateAccountForm />} />
         <Route path="form-builder" element={<FormBuilder />} />
