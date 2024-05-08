@@ -5,7 +5,8 @@ import { BACKEND_URL } from '../../constants';
 
 const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
-function Matches() { //fetching from backend
+const Matches = ({ sessionData }) => {
+// function Matches() { //fetching from backend
   const [error, setError] = useState('');
   const [matches, setMatches] = useState([]); // need this?
 

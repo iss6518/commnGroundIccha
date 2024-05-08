@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../constants';
 
 const FRIEND_REQUESTS_ENDPOINT = `${BACKEND_URL}/friendRequest`;
-const ACCEPT_FRIEND_REQUESTS_ENDPOINT = `${BACKEND_URL}/friendRequestAccept`;
+// const MATCH_ENDPOINT = `${BACKEND_URL}/matches`; to be used for when accepting FR
+
 
 // Component to display a single friend request
-//We also add ability to delete a friend request
+
+// Accept & Delete FR functionality is a work in progress 
+// but ground work has been done here in comments
 function FriendRequest({ request, onDelete, onAccept }) {
   const { user_name, interests } = request;
   const [isDeleting, setDeleting] = useState(false);
   const [isAccepting, setAccepting] = useState(false);
 
+  // ability to delete a friend request
   const handleDelete = async () => {
+    /*
     try {
       setDeleting(true);
 
       // calling endpoint to delete the friend request
-      await axios.delete(FRIEND_REQUESTS_ENDPOINT + '/' + user_name);
+      // filter = {user_name: ..., other_user: ...}
+      await axios.delete(FRIEND_REQUESTS_ENDPOINT, filter);
       onDelete(user_name);
 
     } catch (error) {
@@ -27,15 +33,19 @@ function FriendRequest({ request, onDelete, onAccept }) {
 
     } finally {
       setDeleting(false);
-    }
+    } */
+    console.log("delete friend request is a work in progress")
   };
 
+  // ability to accept a friend request
   const handleAccept = async () => {
+    /*
     try {
       setAccepting(true);
 
       // calling endpoint to accept the friend request
-      await axios.put(ACCEPT_FRIEND_REQUESTS_ENDPOINT + '/' + user_name);
+      // filter = {user_name: ..., other_user: ...}
+      await axios.post(MATCH_ENDPOINT, filter);
       onAccept(user_name);
 
     } catch (error) {
@@ -43,7 +53,8 @@ function FriendRequest({ request, onDelete, onAccept }) {
 
     } finally {
       setAccepting(false);
-    }
+    } */
+    console.log("accept friend request is a work in progress")
   };
 
   return (
@@ -60,15 +71,16 @@ function FriendRequest({ request, onDelete, onAccept }) {
     </div>
   );
 }
-
 //propTypes for friend request component
-FriendReqs.propTypes = {
+FriendRequest.propTypes = {
   request: propTypes.shape({
     user_name: propTypes.string,
     interests: propTypes.string,
   }),
   onDelete: propTypes.func,
+  onAccept: propTypes.func,
 };
+
 
 // Function to convert object of requests to an array
 function requestsObjectToArray({ Data }) {
@@ -78,12 +90,20 @@ function requestsObjectToArray({ Data }) {
 }
 
 // Main component to display all friend requests
-function FriendReqs() {
+const FriendReqs = ({ sessionData }) => {
   const [requests, setRequests] = useState([]);
   const [error, setError] = useState('');
 
+  // if user is not logged in navigate them to login!
+  const navigate = useNavigate();
+  if (!sessionData) {navigate("/login")}
+
   const fetchFriendRequests = () => {
-    axios.get(FRIEND_REQUESTS_ENDPOINT)
+    // get logged in user
+    const currUser = sessionData.session.user_name
+    // only display FRR list for this user
+    axios.get(FRIEND_REQUESTS_ENDPOINT + '/' + currUser)
+    // axios.get(FRIEND_REQUESTS_ENDPOINT)
       .then(({ data }) => setRequests(requestsObjectToArray(data)))
       .catch(() => setError('Something went wrong fetching friend requests.'));
   };

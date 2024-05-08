@@ -10,14 +10,16 @@ import { useNavigate } from 'react-router-dom';
 const LOGIN_ENDPOINT = `${BACKEND_URL}/login`;
 console.log(LOGIN_ENDPOINT)
 
-function LogInForm() {
+// how to pass in prop
+const LogInForm = ({ setSessionData }) => {
   // initial state is empty for both name and password
   const [email, setEmail] = useState('');
+  // TODO: need more secure way of setting password (ex: sha256)
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
-  const [sessionData, setSessionData] = useState(null); // Define sessionData state
+  // const [sessionData, setSessionData] = useState(null); // Define sessionData state
 
   // functions to handle user inputs for username & password (triggered on state change) 
   const changeEmail = (event) => { setEmail(event.target.value); };
@@ -28,9 +30,10 @@ function LogInForm() {
       console.log('filter: ', filter)
       const response = await axios.post(LOGIN_ENDPOINT, filter);
       console.log("success: ", response); // response object is the user session
-      setSessionData(response.data);
-      // <Navigate to="/profile" /> // for now. TODO: might want to redirect to a new home page with logged in
-      navigate("/profile", { state: { sessionData: response.data } })
+      setSessionData(response.data); // set session data. TODO: remove password from session data
+      // TODO: might want to redirect to a new home page with logged in user
+      // navigate("/profile", { state: { sessionData: response.data } })
+      navigate("/profile")
     } catch (error) {
       setError("There was a problem adding the user.");
     }
@@ -41,8 +44,6 @@ function LogInForm() {
   const handleLogIn = (event) => {
     event.preventDefault();
     logIn({email, password});
-    // need to set session to this user here
-    // need to have a developer account and regular user account
   };
 
   return(

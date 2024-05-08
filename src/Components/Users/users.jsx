@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../constants';
 
 const USERS_ENDPOINT = `${BACKEND_URL}/users`;
@@ -82,10 +82,17 @@ function usersObjectToArray({Data}) {
 }
 
 
-function Users() {
+function Users({ sessionData }) {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
   const [searchName, setSearchName] = useState('');
+
+  // TODO: flash message saying user must be logged in to access this page
+  // or remove from nav list if user is not logged in
+  const navigate = useNavigate();
+  if (!sessionData) {
+    console.log("yooooooooooo")
+    navigate("/login")}
 
   
   const handleSearch = (name) => {

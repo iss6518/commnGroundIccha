@@ -5,7 +5,8 @@ import { BACKEND_URL } from '../../constants';
 
 const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
-function Friends() { //fetching from backend
+const Friends = ({ sessionData }) => {
+// function Friends() { //fetching from backend
   const [error, setError] = useState('');
   const [friends, setFriends] = useState([]); // need this?
 

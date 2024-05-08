@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -45,18 +46,20 @@ function Home() {
 }
 
 function App() {
+  const [sessionData, setSessionData] = useState(null);
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar sessionData={sessionData} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login setSessionData={setSessionData} />} />
         <Route path="createaccount" element={<CreateAccountForm />} />
         <Route path="form-builder" element={<FormBuilder />} />
-        <Route path="friendRequests" element={<FriendReqs />} />
-        <Route path="friends" element={<Friends />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="users" element={<Users />} />
+        <Route path="friendRequests" element={<FriendReqs sessionData={sessionData} />} />
+        <Route path="friends" element={<Friends sessionData={sessionData} />} />
+        <Route path="profile" element={<Profile sessionData={sessionData} setSessionData={setSessionData}  />} />
+        <Route path="users" element={<Users sessionData={sessionData} />} />
       </Routes>
     </BrowserRouter>
   );
