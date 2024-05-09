@@ -429,3 +429,13 @@ html, body, #root {
   margin-top: 20px;
   margin-left: 150px;
 }
+
+.success {
+  color: green;
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

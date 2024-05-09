@@ -14,6 +14,7 @@ function CreateAccountForm() {
   const [formFields, setFormFields] = useState([]);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
 
   useEffect(() => {
@@ -35,13 +36,15 @@ function CreateAccountForm() {
 
   fetchFormStructure();
 }, []);
+
   // Initialize form data based on fetched form structure
   const initializeFormData = (fields) => {
     const initialData = {};
     fields.forEach(field => {
       initialData[field.fld_nm] = field.default || '';
     });
-    setFormData(initialData);
+    //setFormData(initialData);
+    return initialData;
   };
 
   const handleInputChange = (e) => {
@@ -52,13 +55,22 @@ function CreateAccountForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData)
       const response = await axios.post(`${BACKEND_URL}/users`, formData);
-      // Handle success
-      console.log("Form submitted:", response.data);
+      if (response.status === 200) {
+        setSuccess("Account created successfully!");
+        setFormData(initializeFormData(formFields)); // Reset form data to initial state
+        setError(""); // Clear any previous errors
+
+        // Optional: Redirect to login page after a delay
+        setTimeout(() => {
+          window.location.href = '/login'; // Adjust the URL to your login route
+        }, 3000); // Redirect after 3 seconds
+      } else {
+        throw new Error('Failed to create account');
+      }
     } catch (error) {
-      // Handle error
       setError("Failed to submit form.");
+      setSuccess(""); // Clear any previous success messages
     }
   };
 
@@ -94,6 +106,7 @@ function CreateAccountForm() {
       ))}
       <button type="submit">Create Account</button>
     </form>
+    {success && <div className="success">{success}</div>}
     {error && <div className="error">{error}</div>}
   </div>
 );
