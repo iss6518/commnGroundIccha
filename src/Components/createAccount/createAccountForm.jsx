@@ -1,17 +1,20 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BACKEND_URL } from '../../constants';
-import { useNavigate } from 'react-router-dom';
 
-const USERS_ENDPOINT = `${BACKEND_URL}/users`;
+//const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
+/*
+TODO: 
+* need success message & clear out form once user clicks create account 
+* need to redirect to login page once user creates account
+*/
 
 function CreateAccountForm() {
   const [formFields, setFormFields] = useState([]);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
-
-  const navigate = useNavigate();
+  const [success, setSuccess] = useState("");
 
 
   useEffect(() => {
