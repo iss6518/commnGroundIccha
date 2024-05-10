@@ -1,24 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
+import { useNavigate } from 'react-router-dom';
 
 const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
 const Friends = ({ sessionData }) => {
   const [error, setError] = useState('');
-  const [friends, setFriends] = useState([]); // need this?
+  const [friends, setFriends] = useState([]);
+
+  // if user is not logged in navigate them to login!
+  const navigate = useNavigate();
+  if (!sessionData) {navigate("/login")}
 
   const fetchFriends = () => {
-    axios.get(USERS_ENDPOINT)
-    .then((response) => {
-      const friendsObj = response.data.Data;
-      const keys = Object.keys(friendsObj);
-      const friendArr = keys.map((key) => friendsObj[key]);
-      setFriends(friendArr);
-      console.log(response);
-    }) // something good
-    .catch(() => { setError('Something went wrong!'); }); //something bad
+    // if logged in
+    if (sessionData) {
+      // get logged in user
+      const currUser = sessionData.session.user_name
+      const filter = {'user_name': currUser}
+      console.log(filter)
+
+      // only display MATCHES list for this user
+      // TODO: need BE endpoint to filter by user name so we can get this list
+      axios.get(USERS_ENDPOINT, filter)
+      .then((response) => {
+        const friendsObj = response.data.Data;
+        const keys = Object.keys(friendsObj);
+        const friendArr = keys.map((key) => friendsObj[key]);
+        setFriends(friendArr);
+        console.log(response);
+      }) // something good
+      .catch(() => { setError('Something went wrong!'); }); //something bad
+    }
+    else {navigate("/login")}
   };
 
   useEffect(
@@ -28,6 +43,7 @@ const Friends = ({ sessionData }) => {
     // be called on initial render of app
   );
 
+  // TODO: Message Friend & Remove Friend buttons are a work in progress
   return (
   <div className="wrapper">
     <h1>

@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+IMPORTANT NOTE ABOUT OUR BE ENDPOINT: we have been getting a weird cors error only on POST requests whenever we try to run out FE against our local BE endpoint ("http://127.0.0.1:8000/") so we have set our path in constants.js to always hit our deployed BE endpoint "https://commonground.pythonanywhere.com/" \
+It seems that the cors issue goes away sometimes with our local endpoint but it's not consistent and after trying to debug for weeks we found that all CORS issues go away with the deployed endpoint and it seems the issue is not with our code but maybe with the browsers we've been using. Professor is aware of this issue and we're still actively trying to find a solve for this. 
+
 ## Available Scripts 
 
 Start by cloaning this repository using the script: 

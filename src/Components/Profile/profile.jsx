@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
 const Profile = ({ sessionData, setSessionData }) => {
-// const Profile = () => {
-    //const location = useLocation(); // get current location of a React component (state info)
-    //const sessionData = location.state?.sessionData.session;
     const navigate = useNavigate();
 
     if (!sessionData) {
         console.log("no data :) ")
-        navigate("/login")} // hmmm
+        navigate("/login")
+    }
 
     else {
     console.log("IN PROFILE: ", sessionData)

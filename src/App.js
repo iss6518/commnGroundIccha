@@ -34,8 +34,8 @@ function Home({ sessionData }) {
           {/* Buttons for Login and Create Account */}
           {!sessionData ? (
             <div className="button-container">
-              <button onClick={() => navigate('/profile')} className="link-button">Profile</button>
-              <button onClick={() => navigate('/friends')} className="link-button">Friends</button>
+              <button onClick={() => navigate('/login')} className="link-button">Log In</button>
+              <button onClick={() => navigate('/createaccount')} className="link-button">Create Account</button>
             </div>
           ) : null}
         </div>

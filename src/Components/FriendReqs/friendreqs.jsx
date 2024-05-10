@@ -99,13 +99,23 @@ const FriendReqs = ({ sessionData }) => {
   if (!sessionData) {navigate("/login")}
 
   const fetchFriendRequests = () => {
-    // get logged in user
-    const currUser = sessionData.session.user_name
+    // if logged in
+    if (sessionData) {
+      // get logged in user
+      const currUser = sessionData.session.user_name
+      const filter = {'user_name': currUser}
+      console.log(filter)
+    
     // only display FRR list for this user
-    //axios.get(FRIEND_REQUESTS_ENDPOINT + '/' + currUser)
-    axios.get(FRIEND_REQUESTS_ENDPOINT)
-      .then(({ data }) => setRequests(requestsObjectToArray(data)))
+    // TODO: need a BE endpoint to display only one user's FRR
+    axios.get(FRIEND_REQUESTS_ENDPOINT, filter)
+      .then(({ data }) => {
+        setRequests(requestsObjectToArray(data))
+        console.log(data)
+      })
       .catch(() => setError('Something went wrong fetching friend requests.'));
+    }
+    else {navigate("/login")}
   };
 
   useEffect(

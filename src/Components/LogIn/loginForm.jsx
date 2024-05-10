@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
 import { useNavigate } from 'react-router-dom';
-
-//import { useNavigate, Link } from 'react-router-dom';
-//import {useDispatch} from 'react-redux'
 
 const LOGIN_ENDPOINT = `${BACKEND_URL}/login`;
 console.log(LOGIN_ENDPOINT)
@@ -31,7 +27,6 @@ const LogInForm = ({ setSessionData }) => {
       const response = await axios.post(LOGIN_ENDPOINT, filter);
       console.log("success: ", response); // response object is the user session
       setSessionData(response.data); // set session data. TODO: remove password from session data
-      // TODO: might want to redirect to a new home page with logged in user
       // navigate("/profile", { state: { sessionData: response.data } })
       navigate("/profile")
     } catch (error) {
