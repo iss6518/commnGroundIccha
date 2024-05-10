@@ -2,13 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BACKEND_URL } from '../../constants';
 
-//const USERS_ENDPOINT = `${BACKEND_URL}/users`;
-
-/*
-TODO: 
-* need success message & clear out form once user clicks create account 
-* need to redirect to login page once user creates account
-*/
+const USERS_ENDPOINT = `${BACKEND_URL}/users`;
 
 function CreateAccountForm() {
   const [formFields, setFormFields] = useState([]);
@@ -55,7 +49,7 @@ function CreateAccountForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${BACKEND_URL}/users`, formData);
+      const response = await axios.post(USERS_ENDPOINT, formData);
       if (response.status === 200) {
         setSuccess("Account created successfully!");
         setFormData(initializeFormData(formFields)); // Reset form data to initial state
