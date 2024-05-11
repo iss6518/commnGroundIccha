@@ -103,17 +103,23 @@ const FriendReqs = ({ sessionData }) => {
     if (sessionData) {
       // get logged in user
       const currUser = sessionData.session.user_name
-      const filter = {'user_name': currUser}
-      console.log(filter)
     
-    // only display FRR list for this user
-    // TODO: need a BE endpoint to display only one user's FRR
-    axios.get(FRIEND_REQUESTS_ENDPOINT, filter)
+      axios.get(FRIEND_REQUESTS_ENDPOINT)
       .then(({ data }) => {
-        setRequests(requestsObjectToArray(data))
-        console.log(data)
-      })
-      .catch(() => setError('Something went wrong fetching friend requests.'));
+        // Filter the data by user_name
+        // console.log("data: ", data)
+        const filteredRequests = Object.values(data.Data).filter(item => item.user_name == currUser);
+        console.log("FilterObj", filteredRequests)
+        
+        // Convert the filtered requests object into an array
+        if (filteredRequests) {
+          const filteredRequestsArray = filteredRequests[0].friend_request_received
+          console.log("FilterArray", filteredRequestsArray)
+          // Update the state with the filtered requests
+          setRequests(filteredRequestsArray);
+          ;}
+        })
+        .catch(() => setError('Something went wrong fetching friend requests.'));
     }
     else {navigate("/login")}
   };
@@ -124,12 +130,30 @@ const FriendReqs = ({ sessionData }) => {
     // if THIS is empty meaning it'll only
     // be called on initial render of app
   );
+
+  if(requests.length == 0) {
+    return (
+      <div className="wrapper">
+      <h1>
+      All Friend Request
+      </h1>
+      {error && (
+        <div className="error-message">
+        {error}
+        </div>
+      )}
+      <h2>YOU HAVE NO FRIEND REQUESTS PENDING</h2>
+    </div>
+    )
+  }
   return (
     <div className="wrapper">
       <h1>All Friend Requests</h1>
       {error && <div className="error-message">{error}</div>}
       <div className="request-list">
-        {requests.map((request) => <FriendRequest key={request.user_name} request={request} />)}
+        {requests.map((username) => (
+          <FriendRequest key={username} request={{ user_name: username }} />
+        ))}
       </div>
     </div>
   );

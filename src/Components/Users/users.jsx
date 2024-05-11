@@ -114,20 +114,23 @@ function Users({ sessionData }) {
   };
 
   const addFriend = (userToAdd) => {
-    const user_name = 'cloudDave'; // test user account until we figure out login
-    const other_user = userToAdd.user_name;
+    if (sessionData) {
+      // get logged in user
+      const user_name = sessionData.session.user_name
+      const other_user = userToAdd.user_name;
 
-    console.log(user_name)
-    console.log(other_user)
+      console.log(user_name)
+      console.log(other_user)
 
-    axios.post(FRIENDREQ_ENDPOINT, { user_name, other_user })
-      .then(() => {
-        console.log('Friend added successfully');
-      })
-      .catch((error) => {
-        setError('Something went wrong');
-        console.error('Error adding friend:', error);
-      });
+      axios.post(FRIENDREQ_ENDPOINT, { user_name, other_user })
+        .then(() => {
+          console.log('Friend added successfully');
+        })
+        .catch((error) => {
+          setError('Something went wrong');
+          console.error('Error adding friend:', error);
+        });
+    } else {navigate("/login")}
   };
 
   useEffect(() => {
